@@ -24,12 +24,17 @@ class MainActivity : AppCompatActivity() {
             duration = 1500
         }
 
+        val fadeOut = ObjectAnimator.ofFloat(textView,"alpha",0f,1f).apply {
+            duration = 2000
+        }
+
         val bouncer = AnimatorSet().apply {
             play(anim1).before(anim2)
+            play(fadeIn).after(anim2)
         }
 
         AnimatorSet().apply {
-            play(bouncer).before(fadeIn)
+            play(bouncer).before(fadeOut)
             start()
         }
 
