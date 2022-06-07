@@ -10,6 +10,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val textView = findViewById<TextView>(R.id.tvHello)
+        ObjectAnimator.ofFloat(textView,"translationX",100f).apply {
+            duration = 1000
+            start()
+        }
     }
 }
