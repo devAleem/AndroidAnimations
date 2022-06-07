@@ -1,5 +1,6 @@
 package com.aleem.animations
 
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,9 +12,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val textView = findViewById<TextView>(R.id.tvHello)
-        ObjectAnimator.ofFloat(textView,"translationX",100f).apply {
-            duration = 1000
+       val anim1 = ObjectAnimator.ofFloat(textView,"translationX",100f).apply {
+         duration = 500
+       }
+
+        val anim2 = ObjectAnimator.ofFloat(textView,"translationX",-100f).apply {
+        duration = 1000
+        }
+
+        val fadeIn = ObjectAnimator.ofFloat(textView,"alpha",1f,0f).apply {
+            duration = 1500
+        }
+
+        val bouncer = AnimatorSet().apply {
+            play(anim1).before(anim2)
+        }
+
+        AnimatorSet().apply {
+            play(bouncer).before(fadeIn)
             start()
         }
+
     }
 }
