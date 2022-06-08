@@ -28,13 +28,18 @@ class MainActivity : AppCompatActivity() {
             duration = 2000
         }
 
+        val rotate =  ObjectAnimator.ofFloat(textView,"rotation",0f,360f).apply {
+            duration = 2500
+        }
+
         val bouncer = AnimatorSet().apply {
             play(anim1).before(anim2)
             play(fadeIn).after(anim2)
+            play(fadeIn).before(fadeOut)
         }
 
         AnimatorSet().apply {
-            play(bouncer).before(fadeOut)
+            play(bouncer).before(rotate)
             start()
         }
 
